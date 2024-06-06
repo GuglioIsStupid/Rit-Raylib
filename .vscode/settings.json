@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.hxc": "haxe",
+        "tuple": "cpp"
+    }
+}
