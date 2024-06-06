@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+/* #include "rapidyaml.hpp" */
 
 #include "Globals.hpp"
 #include "GameState.hpp"
@@ -9,7 +10,6 @@ RenderTexture2D target = { 0 };
 Vector2 mousePosition = { 0 };
 
 Camera camera = { 0.0f };
-
 float ratio = 1.0f;
 
 static void mainUpdate(void);
@@ -26,14 +26,13 @@ int main()
 {
     ratio = (float)GAME_WIDTH / (float)GAME_HEIGHT;
 
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Rit");
     SetTargetFPS(TARGET_FRAMERATE);
 
     mousePosition = { 0.0f, 0.0f };
 
     target = LoadRenderTexture(GAME_WIDTH, GAME_HEIGHT);
-
 
     SwitchState(new TestState());
 
@@ -92,7 +91,12 @@ static void mainDraw(void)
         DrawTexturePro(
             target.texture,
             { 0.0f, 0.0f, (float)target.texture.width, (float)-target.texture.height },
-            { (GetScreenWidth() - ((float)target.texture.width * scale)) / 2, (GetScreenHeight() - ((float)target.texture.height * scale)) / 2, (float)target.texture.width * scale, (float)target.texture.height * scale },
+            { 
+                (GetScreenWidth() - ((float)target.texture.width * scale)) / 2, 
+                (GetScreenHeight() - ((float)target.texture.height * scale)) / 2, 
+                (float)target.texture.width * scale, 
+                (float)target.texture.height * scale 
+            },
             { 0.0f, 0.0f },
             0.0f,
             WHITE

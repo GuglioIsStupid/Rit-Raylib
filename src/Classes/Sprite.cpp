@@ -28,6 +28,7 @@ void Sprite::load(const std::string filename)
     alive = true;
     visible = true;
     texture = LoadTexture(filename.c_str());
+    SetTextureFilter(texture, TEXTURE_FILTER_TRILINEAR);
 
     width = texture.width;
     height = texture.height;
@@ -46,13 +47,14 @@ void Sprite::draw()
         x = this->x;
         y = this->y;
 
-        int sx, sy, ox, oy;
+        float sx, sy;
+        int ox, oy;
         sx = scale.x;
         sy = scale.y;
         ox = origin.x;
         oy = origin.y;
 
-        /* std::cout << "x: " << x << " y: " << y << " sx: " << sx << " sy: " << sy << " ox: " << ox << " oy: " << oy << std::endl; */
+        std::cout << "x: " << x << " y: " << y << " sx: " << sx << " sy: " << sy << " ox: " << ox << " oy: " << oy << std::endl;
         
         Color c = color;
         c.a = alpha * 255;
@@ -74,9 +76,14 @@ void Sprite::draw()
 
         DrawTexturePro(
             texture,
-            { 0, 0, (float)texture.width, (float)texture.height },
-            { (float)x, (float)y, (float)width * sx, (float)height * sy },
-            { (float)ox, (float)oy },
+            { 0.0f, 0.0f, (float)texture.width, (float)texture.height },
+            { 
+                (float)x,
+                (float)y, 
+                (float)width * sx, 
+                (float)height * sy 
+                },
+            { (float)ox* sx, (float)oy * sy },
             angle,
             c
         );

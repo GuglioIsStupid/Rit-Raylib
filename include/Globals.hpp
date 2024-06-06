@@ -8,6 +8,6 @@ const int SCREEN_HEIGHT = 720;
 const int GAME_WIDTH = 1920;
 const int GAME_HEIGHT = 1080;
 
-const int TARGET_FRAMERATE = 165;
+const int TARGET_FRAMERATE = 1000;
 
 #endif
